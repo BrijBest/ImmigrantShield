@@ -7,10 +7,7 @@ import {
   LayoutDashboard, Shield, Calendar, AlertTriangle,
   Phone, Search, User, Bell, Settings, ChevronRight,
   CheckCircle, XCircle, AlertCircle, Clock, FileText,
-  Briefcase, TrendingUp, <button onClick={async()=>{ await supabase.auth.signOut(); router.push("/login"); }}
-  style={{background:"none",border:"none",cursor:"pointer",display:"flex",alignItems:"center",gap:6,color:"rgba(255,255,255,0.4)",fontSize:12,fontFamily:"inherit",padding:"0.5rem 0.75rem",width:"100%"}}>
-  <LogOut size={14}/> Sign Out
-</button>, Menu, X, ChevronDown,
+  Briefcase, TrendingUp, LogOut, Menu, X, ChevronDown,
   MapPin, Globe, Building, GraduationCap, Award,
   ArrowRight, Info, Zap, Eye, RefreshCw, Download
 } from "lucide-react";
