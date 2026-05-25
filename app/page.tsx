@@ -1,11 +1,16 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { supabase } from "@/lib/supabaseClient";
+import { useRouter } from "next/navigation";
 import {
   LayoutDashboard, Shield, Calendar, AlertTriangle,
   Phone, Search, User, Bell, Settings, ChevronRight,
   CheckCircle, XCircle, AlertCircle, Clock, FileText,
-  Briefcase, TrendingUp, LogOut, Menu, X, ChevronDown,
+  Briefcase, TrendingUp, <button onClick={async()=>{ await supabase.auth.signOut(); router.push("/login"); }}
+  style={{background:"none",border:"none",cursor:"pointer",display:"flex",alignItems:"center",gap:6,color:"rgba(255,255,255,0.4)",fontSize:12,fontFamily:"inherit",padding:"0.5rem 0.75rem",width:"100%"}}>
+  <LogOut size={14}/> Sign Out
+</button>, Menu, X, ChevronDown,
   MapPin, Globe, Building, GraduationCap, Award,
   ArrowRight, Info, Zap, Eye, RefreshCw, Download
 } from "lucide-react";
@@ -618,6 +623,23 @@ function ProfileView() {
 
 // ── MAIN APP ─────────────────────────────────────────────────────
 export default function App() {
+  const router = useRouter();
+const [authUser, setAuthUser] = useState<any>(null);
+const [authLoading, setAuthLoading] = useState(true);
+
+useEffect(() => {
+  supabase.auth.getSession().then(({ data: { session } }) => {
+    if (!session) { router.push("/login"); return; }
+    setAuthUser(session.user);
+    setAuthLoading(false);
+  });
+}, []);
+
+if (authLoading) return (
+  <div style={{display:"flex",alignItems:"center",justifyContent:"center",height:"100vh",background:"#0F1E45",color:"white",fontSize:16,fontFamily:"sans-serif"}}>
+    Loading ImmigrantShield…
+  </div>
+);
   const [view, setView] = useState("dashboard");
   const [notifOpen, setNotifOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
