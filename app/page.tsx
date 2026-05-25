@@ -736,6 +736,12 @@ if (authLoading) return (
             <button style={{ background:"none", border:`1px solid ${C.lgrey}`, borderRadius:8, padding:"6px 8px", cursor:"pointer", display:"flex", alignItems:"center" }}>
               <Settings size={16} color={C.mgrey}/>
             </button>
+
+            <button onClick={async()=>{ await supabase.auth.signOut(); router.push("/login"); }}
+              style={{background:"none",border:"none",cursor:"pointer",display:"flex",alignItems:"center",gap:6,color:"rgba(255,255,255,0.4)",fontSize:12,fontFamily:"inherit",padding:"0.5rem 0.75rem",width:"100%",marginTop:8}}>
+              <LogOut size={14}/> Sign Out
+              </button>
+
           </div>
         </div>
 
